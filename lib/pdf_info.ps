@@ -11,6 +11,28 @@ pop      % discard the dict from where
 
 /QUIET true def    % in case they forgot
 
+% Get the width and height of a PDF page
+%
+/GetSize {
+  pdfgetpage currentpagedevice
+  1 index get_any_box
+  exch pop dup 2 get exch 3 get
+  /PDFHeight exch def
+  /PDFWidth exch def
+} def
+
+%
+% The main loop
+% For every page in the original PDF file
+%
+1 1 PDFPageCount
+{
+  /PDFPage exch def
+  PDFPage GetSize
+  PDFPage pdfgetpage
+  pdfshowpage
+} for
+
 () =
 File dup (r) file runpdfbegin
 /PDFPageCount pdfpagecount def

@@ -5,9 +5,9 @@ require "grim/version"
 Gem::Specification.new do |s|
   s.name        = "grim"
   s.version     = Grim::VERSION
-  s.authors     = ["Jonathan Hoyt"]
-  s.email       = ["jonmagic@gmail.com"]
-  s.homepage    = "http://github.com/jonmagic/grim"
+  s.authors     = ["Jonathan Hoyt", "Sander de Goeij"]
+  s.email       = ["sander@sanderdegoeij.com"]
+  s.homepage    = "http://github.com/sdegoeij/grim"
   s.summary     = %q{Extract slides and text from a PDF.}
   s.description = %q{Grim is a simple gem for extracting a page from a pdf and converting it to an image as well as extract the text from the page as a string. It basically gives you an easy to use api to ghostscript, imagemagick, and pdftotext specific to this use case.}
 
