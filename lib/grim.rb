@@ -5,6 +5,9 @@ module Grim
   extend self
   attr_accessor :processor
 
+  # By default we resize
+  RESIZE = true
+
   # Default resize output width, any positive integer
   WIDTH = 1024
 

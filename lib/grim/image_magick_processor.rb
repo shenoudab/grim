@@ -23,10 +23,15 @@ module Grim
       width   = options.fetch(:width,   Grim::WIDTH)
       density = options.fetch(:density, Grim::DENSITY)
       quality = options.fetch(:quality, Grim::QUALITY)
-      command = [@imagemagick_path, "-flatten", "-resize", width.to_s, "-antialias", "-render",
+      resize  = options.fetch(:resize,  Grim::RESIZE)
+      command = [@imagemagick_path, "-flatten", "-antialias", "-render",
         "-quality", quality.to_s, "-colorspace", "RGB",
         "-interlace", "none", "-density", density.to_s,
         "#{Shellwords.shellescape(pdf.path)}[#{index}]", path]
+      if resize
+        command.insert(2, "-resize")
+        command.insert(3, width.to_s)
+      end
       command.unshift("PATH=#{File.dirname(@ghostscript_path)}:#{ENV['PATH']}") if @ghostscript_path
 
       result = `#{command.join(' ')}`
