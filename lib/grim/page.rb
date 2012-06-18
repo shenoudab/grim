@@ -3,6 +3,7 @@ module Grim
   class Page
 
     attr_reader :number
+    attr_reader :index
 
     # Sets up some instance variables on new instance.
     #
