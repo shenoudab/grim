@@ -28,6 +28,7 @@ module Grim
         "-quality", quality.to_s, "-colorspace", "RGB",
         "-interlace", "none", "-density", density.to_s,
         "#{Shellwords.shellescape(pdf.path)}[#{index}]", path]
+
       if resize
         command.insert(2, "-resize")
         command.insert(3, width.to_s)
@@ -35,8 +36,8 @@ module Grim
 
       if processor_options.any?
         processor_options.each_pair do |key, value|
-          command.insert(12, key.to_s)
-          command.insert(13, value)
+          command.insert(12, "-#{key.to_s}")
+          command.insert(13, value.is_a?(String) ? "#{value}" : value )
         end
       end
 
