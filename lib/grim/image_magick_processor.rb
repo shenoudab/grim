@@ -19,7 +19,7 @@ module Grim
       result.gsub(WarningRegex, '').to_i
     end
 
-    def save(pdf, index, path, options)
+    def save(pdf, index, path, options, processor_options)
       width   = options.fetch(:width,   Grim::WIDTH)
       density = options.fetch(:density, Grim::DENSITY)
       quality = options.fetch(:quality, Grim::QUALITY)
@@ -32,6 +32,14 @@ module Grim
         command.insert(2, "-resize")
         command.insert(3, width.to_s)
       end
+
+      if processor_options.any?
+        processor_options.each_pair do |key, value|
+          command.insert(12, key.to_s)
+          command.insert(13, value)
+        end
+      end
+
       command.unshift("PATH=#{File.dirname(@ghostscript_path)}:#{ENV['PATH']}") if @ghostscript_path
 
       result = `#{command.join(' ')}`
