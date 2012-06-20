@@ -25,7 +25,7 @@ module Grim
       quality = options.fetch(:quality, Grim::QUALITY)
       resize  = options.fetch(:resize,  Grim::RESIZE)
       command = [@imagemagick_path, "-flatten", "-antialias", "-render",
-        "-quality", quality.to_s, "-colorspace", "RGB",
+        "-quality", quality.to_s,
         "-interlace", "none", "-density", density.to_s,
         "#{Shellwords.shellescape(pdf.path)}[#{index}]", path]
 
@@ -36,8 +36,8 @@ module Grim
 
       if processor_options.any?
         processor_options.each_pair do |key, value|
-          command.insert(12, "-#{key.to_s}")
-          command.insert(13, value.is_a?(String) ? "#{value}" : value )
+          command.insert(10, "-#{key.to_s}")
+          command.insert(11, value.is_a?(String) ? "#{value}" : value )
         end
       end
 
