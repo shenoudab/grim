@@ -21,6 +21,7 @@ module Grim
 
     def save(pdf, index, path, options, processor_options)
       width   = options.fetch(:width,   Grim::WIDTH)
+      height  = options.fetch(:height,  Grim::HEIGHT)
       density = options.fetch(:density, Grim::DENSITY)
       quality = options.fetch(:quality, Grim::QUALITY)
       resize  = options.fetch(:resize,  Grim::RESIZE)
@@ -31,7 +32,11 @@ module Grim
 
       if resize
         command.insert(2, "-resize")
-        command.insert(3, width.to_s)
+        if height == 0
+            command.insert(3, width.to_s)
+	      else
+	          command.insert(3, "#{width.to_s}x#{height.to_s}!")
+	      end
       end
 
       if processor_options.any?
