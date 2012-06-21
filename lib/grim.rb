@@ -10,6 +10,9 @@ module Grim
 
   # Default resize output width, any positive integer
   WIDTH = 1024
+  
+  # Default resize output height, any positive integer
+  HEIGHT = 0
 
   # Default image quality, 1 to 100
   QUALITY = 90
